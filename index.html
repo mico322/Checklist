@@ -194,12 +194,7 @@ tr.incorrect {
 
   <script>
   const data = [
-  // 1. Start with verifying ownership and basic identity of the car
-  { category: "Vehicle Info", item: "Look at the car’s OR/CR registration documents", how: "Ask the owner to show the official papers for the car." },
-  { category: "Vehicle Info", item: "Make sure the engine and VIN numbers match the papers", how: "Check if the numbers on the car match the documents." },
-  { category: "Vehicle Info", item: "Check if 67 km mileage is real", how: "See if the car still looks fairly new  clean seats, pedals, and steering wheel, with only light or no scratches" },
-  { category: "Vehicle Info", item: "Find out how many people owned the car before", how: "Ask the owner or check the papers to see how many past owners there are." },
-  { category: "Vehicle Info", item: "Ask why the mileage is low", how: "Ask the owner directly." },
+ 
 
   // 2. Physical check – exterior
   { category: "Exterior", item: "Look for signs of repaint or body repairs", how: "Check if paint looks uneven or rough in some areas." },
@@ -208,50 +203,78 @@ tr.incorrect {
   { category: "Exterior", item: "Check if tires are still in good shape", how: "Look at all the tires, including the reserve tires." },
   { category: "Exterior", item: "Check if all lights are working", how: "Turn on the headlights, brake lights, signal lights, and reverse lights to see if they all work." },
 
+// 8. Other checks
+  { category: "Other Checks", item: "Check the battery", how: "Look at the battery for install date — newer is better." },
+  { category: "Other Checks", item: "Check for jack and tools", how: "Look in the trunk to see if they're included." },
+  { category: "Other Checks", item: "Ask for spare key", how: "There should be a second key." },
+  { category: "Other Checks", item: "Look under the car", how: "Check for oil leaks or rust under the car." },
 
   // 3. Physical check – interior
- { category: "Interior", item: "Check if seats are clean and okay", how: "Look for any damage like tears or stains." },
-{ category: "Interior", item: "Check if dashboard is still in good shape", how: "Look for cracks or fading." },
-{ category: "Interior", item: "Test if all buttons and switches work", how: "Try the windows, wipers, horn, and other buttons." },
-{ category: "Interior", item: "Test the aircon and heater", how: "Turn them on to see if cold or hot air comes out." },
-{ category: "Interior", item: "Test the radio or sound system", how: "Turn it on, change stations, and check the volume." },
-{ category: "Interior", item: "Check if floor mats and tools are there", how: "Look under the seats and in the trunk." },
+  { category: "Interior", item: "Check if seats are clean and okay", how: "Look for any damage like tears or stains." },
+  { category: "Interior", item: "Check if dashboard is still in good shape", how: "Look for cracks or fading." },
+  { category: "Interior", item: "Test if all buttons and switches work", how: "Try the windows, wipers, horn, and other buttons." },
+  { category: "Interior", item: "Test the aircon and heater", how: "Turn them on to see if cold or hot air comes out." },
+  { category: "Interior", item: "Test the radio or sound system", how: "Turn it on, change stations, and check the volume." },
+  { category: "Interior", item: "Check if floor mats and tools are there", how: "Look under the seats and in the trunk." },
 
-{ category: "Engine", item: "Check for oil leaks or rust", how: "Open the hood and look for oil spots or rust." },
-{ category: "Engine", item: "Check if engine bay looks too clean", how: "If it looks super clean, ask if it was just washed." },
+  // 4. Engine check
+  { category: "Engine", item: "Check for oil leaks or rust", how: "Open the hood and look for oil spots or rust." },
+  { category: "Engine", item: "Check if engine bay looks too clean", how: "If it looks super clean, ask if it was just washed." },
+  { category: "Engine", item: "Start the engine and listen", how: "Make sure it sounds smooth, not rough or weird." },
+  { category: "Engine", item: "Check if exhaust smoke is clear", how: "Start the car and look at the tailpipe — smoke should be clear, not black or blue." },
+  { category: "Engine", item: "Check belts and hoses", how: "Look under the hood for cracks or worn parts." },
 
-  // ENGINE
-{ category: "Engine", item: "Start the engine and listen", how: "Make sure it sounds smooth, not rough or weird." },
-{ category: "Engine", item: "Check if exhaust smoke is clear", how: "Start the car and look at the tailpipe — smoke should be clear, not black or blue." },
-{ category: "Engine", item: "Check belts and hoses", how: "Look under the hood for cracks or worn parts." },
+  // 5. Fluids
+  { category: "Fluids", item: "Check engine oil", how: "Use the dipstick — oil should be clean and at the right level." },
+  { category: "Fluids", item: "Check brake fluid", how: "Look at the brake fluid tank — level should be between the marks." },
+  { category: "Fluids", item: "Check coolant", how: "Coolant in the tank should look clean and bright, not dirty or brown." },
+  { category: "Fluids", item: "Check transmission fluid", how: "If manual, ask if gear oil was recently changed." },
+  { category: "Fluids", item: "Check washer fluid", how: "Press the button to see if it sprays on the windshield." },
 
-// FLUIDS
-{ category: "Fluids", item: "Check engine oil", how: "Use the dipstick — oil should be clean and at the right level." },
-{ category: "Fluids", item: "Check brake fluid", how: "Look at the brake fluid tank — level should be between the marks." },
-{ category: "Fluids", item: "Check coolant", how: "Coolant in the tank should look clean and bright, not dirty or brown." },
-{ category: "Fluids", item: "Check transmission fluid", how: "If manual, ask if gear oil was recently changed." },
-{ category: "Fluids", item: "Check washer fluid", how: "Press the button to see if it sprays on the windshield." },
 
-// TEST DRIVE
-{ category: "Test Drive", item: "Test the brakes", how: "Drive slowly and hit the brakes — no strange sounds, should stop well." },
-{ category: "Test Drive", item: "Check steering", how: "Turn left and right — it should feel smooth and easy." },
-{ category: "Test Drive", item: "Try changing gears", how: "Shift all gears and reverse — it should be smooth." },
-{ category: "Test Drive", item: "", how: "Listen for any weird noises while driving on rough roads." },
-{ category: "Test Drive", item: "Test turning and reversing", how: "Try turning in tight spots and backing up to check handling." },
+  // 7. Paperwork
+  { category: "Paperwork", item: "Check the Certificate of Registration (CR)", how: "It should match the car’s info." },
+  { category: "Paperwork", item: "Get the latest Official Receipt (OR)", how: "Make sure taxes are paid and the OR is updated." },
+  { category: "Paperwork", item: "Ask for service or maintenance records", how: "Look for receipts or documents showing oil changes, repairs, etc." },
+  { category: "Paperwork", item: "Get a signed Deed of Sale", how: "Make sure the owner signs it before handing over the car." },
 
-// PAPERWORK
-{ category: "Paperwork", item: "Check the Certificate of Registration (CR)", how: "It should match the car’s info." },
-{ category: "Paperwork", item: "Get the latest Official Receipt (OR)", how: "Make sure taxes are paid and the OR is updated." },
-{ category: "Paperwork", item: "Ask for service or maintenance records", how: "Look for receipts or documents showing oil changes, repairs, etc." },
-{ category: "Paperwork", item: "Get a signed Deed of Sale", how: "Make sure the owner signs it before handing over the car." },
 
-// OTHER CHECKS
-{ category: "Other Checks", item: "Check the battery", how: "Look at the battery for install date — newer is better." },
-{ category: "Other Checks", item: "Check for jack and tools", how: "Look in the trunk to see if they're included." },
-{ category: "Other Checks", item: "Ask for spare key", how: "There should be a second key." },
-{ category: "Other Checks", item: "Look under the car", how: "Check for oil leaks or rust under the car." }
+ // 1. Start with verifying ownership and basic identity of the car
+  { category: "Vehicle Info", item: "Look at the car’s OR/CR registration documents", how: "Ask the owner to show the official papers for the car." },
+  { category: "Vehicle Info", item: "Make sure the engine and VIN numbers match the papers", how: "Check if the numbers on the car match the documents." },
+  { category: "Vehicle Info", item: "Check if 67 km mileage is real", how: "See if the car still looks fairly new  clean seats, pedals, and steering wheel, with only light or no scratches" },
+  { category: "Vehicle Info", item: "Find out how many people owned the car before", how: "Ask the owner or check the papers to see how many past owners there are." },
+  { category: "Vehicle Info", item: "Ask why the mileage is low", how: "Ask the owner directly." },
 
+
+
+// 6. Test drive
+  { category: "Test Drive", item: "Test the brakes", how: "Drive slowly and hit the brakes — no strange sounds, should stop well." },
+  { category: "Test Drive", item: "Check steering", how: "Turn left and right — it should feel smooth and easy." },
+  { category: "Test Drive", item: "Try changing gears", how: "Shift all gears and reverse — it should be smooth." },
+  { category: "Test Drive", item: "Listen for strange noises on rough roads", how: "Listen for any weird noises while driving on bumpy roads." },
+  { category: "Test Drive", item: "Test turning and reversing", how: "Try turning in tight spots and backing up to check handling." },
+
+
+  
+
+  // 9. Upgrades from listing
+  { category: "Upgrades", item: "Check Nakamichi head unit with reverse cam", how: "Turn it on, test the screen, buttons, and reverse camera." },
+  { category: "Upgrades", item: "Check Sony front speakers", how: "Play music and check if sound is clear and working." },
+  { category: "Upgrades", item: "Check leather seat covers", how: "See if they’re clean and properly installed." },
+  { category: "Upgrades", item: "Check white dome light", how: "Turn it on to see if it works." },
+  { category: "Upgrades", item: "Test Bosch horn", how: "Press the horn and listen if it works well." },
+  { category: "Upgrades", item: "Check 15s Rays mags and 2023 tires", how: "Look at the wheels — mags should be clean, and tires not worn out." },
+  { category: "Upgrades", item: "Check body kit", how: "Check if it’s attached properly and not damaged." },
+  { category: "Upgrades", item: "Check all-weather headlights and foglights", how: "Turn them on and see if they’re working." },
+  { category: "Upgrades", item: "Check air filter", how: "Ask owner if it was replaced or check if it looks new." },
+  { category: "Upgrades", item: "Check cabin filter", how: "Ask owner or inspect the cabin filter area if accessible." },
+  { category: "Upgrades", item: "Confirm newly changed engine oil", how: "Ask owner if oil was recently changed — should be fully synthetic." },
+  { category: "Upgrades", item: "Confirm new gear oil", how: "Ask owner if gear oil was recently changed." },
+  { category: "Upgrades", item: "Confirm new coolant (Pro 99)", how: "Ask owner when coolant was replaced — should look clean." },
+  { category: "Upgrades", item: "Confirm new iridium spark plugs", how: "Ask owner if spark plugs were recently changed." }
 ];
+
 
 
 
@@ -394,6 +417,12 @@ tr.incorrect {
       </tr>
     </tbody>
   </table>
+
+
+<p style="text-align:center; color:#333; font-style: italic; margin-bottom: 20px;">
+  📌 <strong>Reminder:</strong> Ask the seller for these documents and also ask them how to do the transfer of ownership.
+</p>
+
 </div>
 
 
