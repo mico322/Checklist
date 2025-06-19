@@ -167,7 +167,13 @@ tr.incorrect {
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container"><div style="text-align:center; margin: 20px;">
+  <button onclick="document.getElementById('documents').scrollIntoView({ behavior: 'smooth' });"
+    style="padding: 10px 20px; font-size: 1rem; background-color: #0a3d62; color: white; border: none; border-radius: 8px; cursor: pointer;">
+    📄 Jump to Documents Checklist
+  </button>
+</div>
+
     <h1>Hyundai Checklist</h1>
     <div id="progress">✅ Checked: 0 / 0</div>
 
@@ -343,7 +349,8 @@ tr.incorrect {
 }
 
   </script>
-</body><!-- Mini Checklist: Documents to Get from Seller -->
+</body><!-- Mini Checklist: Documents to Get from Seller --><div class="container" id="documents">
+
 <div class="container">
   <h2 style="text-align:center; color:#0a3d62;">📄 Documents to Get from the Seller</h2>
   <table>
