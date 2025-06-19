@@ -1,78 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Used Car Checklist</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
       color: #333;
     }
+
     .container {
-      max-width: 1200px;
-      margin: 40px auto;
+      max-width: 1000px;
+      margin: 20px auto;
       padding: 20px;
       background: #ffffffcc;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       border-radius: 12px;
     }
+
     h1 {
       text-align: center;
-      margin-bottom: 30px;
-      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-size: 2rem;
       color: #0a3d62;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      border-radius: 8px;
-      overflow: hidden;
+      margin-bottom: 1rem;
     }
+
     th, td {
-      padding: 14px 16px;
+      padding: 12px 14px;
       border: 1px solid #dfe6e9;
       text-align: left;
     }
+
     th {
-      background-color: #74b9ff;
+      background-color: #2980b9;
       color: white;
       font-weight: 600;
+      font-size: 0.95rem;
     }
+
     tr:nth-child(even) {
       background-color: #f1f2f6;
     }
+
+    .checkbox-group {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .check-label input:checked + span {
+      color: green;
+      font-weight: bold;
+    }
+
+    .x-label input:checked + span {
+      color: red;
+      font-weight: bold;
+    }
+
+    td:first-child {
+      font-weight: bold;
+      background-color: #d6eaff;
+      color: #074c83;
+    }
+
+    #progress {
+      position: sticky;
+      top: 10px;
+      right: 10px;
+      float: right;
+      background: #0984e3;
+      color: #fff;
+      padding: 12px 20px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 8px;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease;
+    }
+
+    #progress:hover {
+      transform: scale(1.05);
+    }
+
     input[type="checkbox"] {
-      transform: scale(1.3);
+      transform: scale(1.2);
       cursor: pointer;
     }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
     @media (max-width: 768px) {
       table, thead, tbody, th, td, tr {
         display: block;
       }
+
       thead tr {
         display: none;
       }
+
       tr {
         margin-bottom: 1rem;
-        border-bottom: 2px solid #ccc;
-        padding: 0.5rem 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 0.5rem;
+        background-color: white;
       }
+
       td {
         position: relative;
         padding-left: 50%;
         text-align: left;
+        border: none;
+        border-bottom: 1px solid #eee;
+        font-size: 0.9rem;
       }
+
       td::before {
         position: absolute;
-        left: 15px;
         top: 12px;
-        font-weight: bold;
+        left: 16px;
+        width: 45%;
         white-space: nowrap;
+        font-weight: bold;
+        color: #0a3d62;
       }
+
       td:nth-of-type(1)::before { content: "Category"; }
       td:nth-of-type(2)::before { content: "Checklist Item"; }
       td:nth-of-type(3)::before { content: "How to Check"; }
@@ -83,7 +151,9 @@
 <body>
   <div class="container">
     <h1>Used Car Inspection Checklist</h1>
-    <table id="checklist">
+    <div id="progress">✅ Checked: 0 / 0</div>
+
+    <table>
       <thead>
         <tr>
           <th>Category</th>
@@ -93,66 +163,131 @@
         </tr>
       </thead>
       <tbody id="checklist-body">
-        <!-- JavaScript will insert rows here -->
+        <!-- Populated by JS -->
       </tbody>
     </table>
   </div>
+
   <script>
-    const data = [
-      { category: 'Vehicle Info', item: 'Make sure the engine and VIN numbers match the papers', how: 'Look at the numbers on the car and on the papers. They should be the same.' },
-      { category: '', item: 'Check if the 39 km mileage is real, not tampered', how: 'See if the car looks really new (no wear on seats or pedals).' },
-      { category: '', item: 'Look at the car’s OR/CR registration documents', how: 'Ask the owner to show the official papers for the car.' },
-      { category: '', item: 'Find out how many people owned the car before', how: 'Ask the owner or check the papers to see how many past owners there are.' },
-      { category: '', item: 'Ask why the car has very low mileage', how: 'Ask the owner why the car was barely used.' },
-      { category: 'Exterior', item: 'Look for signs of repaint or body repairs', how: 'Check if the paint looks different in some parts or feels rough.' },
-      { category: '', item: 'Check the body for dents, scratches, or rust', how: 'Walk around and look carefully for dents, scratches, or rusty spots.' },
-      { category: '', item: 'Check the windshield and windows for cracks', how: 'Look closely at all glass for any cracks or chips.' },
-      { category: '', item: 'Inspect all tires, including the spare', how: 'Check if the tires have good tread and no cracks. Look at the spare tire too.' },
-      { category: '', item: 'Test all lights (headlights, brake, signal, reverse)', how: 'Turn on each light and have someone check if they work.' },
-      { category: 'Interior', item: 'Look at the seats for tears or damage', how: 'Check the seats for any rips or stains.' },
-      { category: '', item: 'Check the dashboard for cracks or fading', how: 'Look at the dashboard for cracks or colors fading.' },
-      { category: '', item: 'Try all buttons, switches, and controls', how: 'Press all buttons like windows, wipers, horn to see if they work.' },
-      { category: '', item: 'Test if the aircon and heater work properly', how: 'Turn on air conditioning and heater; feel if cold or warm air comes out.' },
-      { category: '', item: 'Test the radio or sound system', how: 'Turn on the radio, change stations, and adjust volume.' },
-      { category: '', item: 'Check if floor mats and tools are included', how: 'Look under seats and in the trunk for mats and car tools.' },
-      { category: 'Engine', item: 'Check for oil leaks or rust', how: 'Open the hood and see if there are oil spots or rusty parts.' },
-      { category: '', item: 'See if the engine bay looks too clean (may hide issues)', how: 'If the engine bay looks too shiny or clean, ask if it was just washed.' },
-      { category: '', item: 'Start the engine and listen for weird noises', how: 'Listen if the engine sounds rough or makes strange noises.' },
-      { category: '', item: 'Check the smoke from exhaust (should be clear)', how: 'Watch the exhaust pipe for smoke; it should be clear, not black or blue.' },
-      { category: '', item: 'Look at belts and hoses for cracks or damage', how: 'Look for cracks or dry spots on belts and hoses.' },
-      { category: 'Fluids', item: 'Check the engine oil level and color', how: 'Pull out the dipstick, wipe it, dip again, then check the oil level and color (light brown is good).' },
-      { category: '', item: 'Check brake fluid level', how: 'Look at the brake fluid tank; level should be between the marks.' },
-      { category: '', item: 'Look at coolant level and condition', how: 'Check the coolant tank; the liquid should be bright, not dirty or rusty.' },
-      { category: '', item: 'Check the transmission fluid (if the car has it)', how: 'If automatic, check if transmission fluid is pink/red and clean.' },
-      { category: '', item: 'Check washer fluid for wipers', how: 'Press the washer button and see if water sprays on the windshield.' },
-      { category: 'Test Drive', item: 'Press the brakes – no weird sounds, should stop well', how: 'Drive slowly and press brakes; no noise and car should stop smoothly.' },
-      { category: '', item: 'Turn the wheel – check if steering feels smooth', how: 'Turn left and right gently; steering should feel easy and smooth.' },
-      { category: '', item: 'Try changing gears – should be smooth and easy', how: 'Shift gears and reverse; should be smooth without jerks.' },
-      { category: '', item: 'Drive over bumps – listen for odd noises', how: 'Listen for any strange sounds when driving on bumpy roads.' },
-      { category: '', item: 'Try turning and reversing the car', how: 'Turn the car fully and reverse into a spot to check handling.' },
-      { category: 'Paperwork', item: 'Confirm the Certificate of Registration (CR) is present', how: 'Make sure the CR paper is with the car and matches the car’s numbers.' },
-      { category: '', item: 'Make sure you get the Official Receipt (OR)', how: 'Get the latest OR paper that shows taxes are paid.' },
-      { category: '', item: 'Ask for any service or maintenance records', how: 'Look for papers or receipts showing car repairs or oil changes.' },
-      { category: '', item: 'Check if the car still has any loan or balance', how: 'Ask if the car is fully paid or still has a loan.' },
-      { category: '', item: 'Request a signed Deed of Sale', how: 'Get a signed paper that says the car is being sold to you.' },
-      { category: 'Other Checks', item: 'Look at the battery – check the condition and date', how: 'Check battery sticker for install date; newer is better.' },
-      { category: '', item: 'Check if jack and tools are included', how: 'Look in the trunk for jack and tire tools.' },
-      { category: '', item: 'Ask if there\'s an extra (spare) key', how: 'Make sure there is a spare key just in case.' },
-      { category: '', item: 'Look under the car for leaks or rust', how: 'Get down and look under the car for oil spots or rust patches.' }
-    ];
+  const data = [
+  // 1. Start with verifying ownership and basic identity of the car
+  { category: "Vehicle Info", item: "Look at the car’s OR/CR registration documents", how: "Ask the owner to show the official papers for the car." },
+  { category: "Vehicle Info", item: "Make sure the engine and VIN numbers match the papers", how: "Look at the numbers on the car and on the papers. They should be the same." },
+  { category: "Vehicle Info", item: "Check if the 39 km mileage is real, not tampered", how: "See if the car looks really new (no wear on seats or pedals)." },
+  { category: "Vehicle Info", item: "Find out how many people owned the car before", how: "Ask the owner or check the papers to see how many past owners there are." },
+  { category: "Vehicle Info", item: "Ask why the car has very low mileage", how: "Ask the owner why the car was barely used." },
 
-    const tbody = document.getElementById('checklist-body');
+  // 2. Physical check – exterior
+  { category: "Exterior", item: "Look for signs of repaint or body repairs", how: "Check if the paint looks different in some parts or feels rough." },
+  { category: "Exterior", item: "Check the body for dents, scratches, or rust", how: "Walk around and look carefully for dents, scratches, or rusty spots." },
+  { category: "Exterior", item: "Check the windshield and windows for cracks", how: "Look closely at all glass for any cracks or chips." },
+  { category: "Exterior", item: "Inspect all tires, including the spare", how: "Check if the tires have good tread and no cracks. Look at the spare tire too." },
+  { category: "Exterior", item: "Test all lights (headlights, brake, signal, reverse)", how: "Turn on each light and have someone check if they work." },
 
-    data.forEach(row => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${row.category}</td>
-        <td>${row.item}</td>
-        <td>${row.how}</td>
-        <td style="text-align: center;"><input type="checkbox"></td>
-      `;
-      tbody.appendChild(tr);
+  // 3. Physical check – interior
+  { category: "Interior", item: "Look at the seats for tears or damage", how: "Check the seats for any rips or stains." },
+  { category: "Interior", item: "Check the dashboard for cracks or fading", how: "Look at the dashboard for cracks or colors fading." },
+  { category: "Interior", item: "Try all buttons, switches, and controls", how: "Press all buttons like windows, wipers, horn to see if they work." },
+  { category: "Interior", item: "Test if the aircon and heater work properly", how: "Turn on air conditioning and heater; feel if cold or warm air comes out." },
+  { category: "Interior", item: "Test the radio or sound system", how: "Turn on the radio, change stations, and adjust volume." },
+  { category: "Interior", item: "Check if floor mats and tools are included", how: "Look under seats and in the trunk for mats and car tools." },
+
+  // 4. Engine inspection
+  { category: "Engine", item: "Check for oil leaks or rust", how: "Open the hood and see if there are oil spots or rusty parts." },
+  { category: "Engine", item: "See if the engine bay looks too clean (may hide issues)", how: "If the engine bay looks too shiny or clean, ask if it was just washed." },
+  { category: "Engine", item: "Start the engine and listen for weird noises", how: "Listen if the engine sounds rough or makes strange noises." },
+  { category: "Engine", item: "Check the smoke from exhaust (should be clear)", how: "Watch the exhaust pipe for smoke; it should be clear, not black or blue." },
+  { category: "Engine", item: "Look at belts and hoses for cracks or damage", how: "Look for cracks or dry spots on belts and hoses." },
+
+  // 5. Fluids check
+  { category: "Fluids", item: "Check the engine oil level and color", how: "Pull out the dipstick, wipe it, dip again, then check the oil level and color (light brown is good)." },
+  { category: "Fluids", item: "Check brake fluid level", how: "Look at the brake fluid tank; level should be between the marks." },
+  { category: "Fluids", item: "Look at coolant level and condition", how: "Check the coolant tank; the liquid should be bright, not dirty or rusty." },
+  { category: "Fluids", item: "Check the transmission fluid (if the car has it)", how: "If automatic, check if transmission fluid is pink/red and clean." },
+  { category: "Fluids", item: "Check washer fluid for wipers", how: "Press the washer button and see if water sprays on the windshield." },
+
+  // 6. Test drive
+  { category: "Test Drive", item: "Press the brakes – no weird sounds, should stop well", how: "Drive slowly and press brakes; no noise and car should stop smoothly." },
+  { category: "Test Drive", item: "Turn the wheel – check if steering feels smooth", how: "Turn left and right gently; steering should feel easy and smooth." },
+  { category: "Test Drive", item: "Try changing gears – should be smooth and easy", how: "Shift gears and reverse; should be smooth without jerks." },
+  { category: "Test Drive", item: "Drive over bumps – listen for odd noises", how: "Listen for any strange sounds when driving on bumpy roads." },
+  { category: "Test Drive", item: "Try turning and reversing the car", how: "Turn the car fully and reverse into a spot to check handling." },
+
+  // 7. Final paperwork validation
+  { category: "Paperwork", item: "Confirm the Certificate of Registration (CR) is present", how: "Make sure the CR paper is with the car and matches the car’s numbers." },
+  { category: "Paperwork", item: "Make sure you get the Official Receipt (OR)", how: "Get the latest OR paper that shows taxes are paid." },
+  { category: "Paperwork", item: "Ask for any service or maintenance records", how: "Look for papers or receipts showing car repairs or oil changes." },
+  { category: "Paperwork", item: "Check if the car still has any loan or balance", how: "Ask if the car is fully paid or still has a loan." },
+  { category: "Paperwork", item: "Request a signed Deed of Sale", how: "Get a signed paper that says the car is being sold to you." },
+
+  // 8. Other final checks
+  { category: "Other Checks", item: "Look at the battery – check the condition and date", how: "Check battery sticker for install date; newer is better." },
+  { category: "Other Checks", item: "Check if jack and tools are included", how: "Look in the trunk for jack and tire tools." },
+  { category: "Other Checks", item: "Ask if there's an extra (spare) key", how: "Make sure there is a spare key just in case." },
+  { category: "Other Checks", item: "Look under the car for leaks or rust", how: "Get down and look under the car for oil spots or rust patches." }
+];
+
+
+   const tbody = document.getElementById('checklist-body');
+  const progress = document.getElementById('progress');
+
+  function createRow(row, index) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${row.category}</td>
+      <td>${row.item}</td>
+      <td>${row.how}</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="check-label">
+            <input type="checkbox" name="row-${index}" class="check" />
+            <span>✓</span>
+          </label>
+          <label class="x-label">
+            <input type="checkbox" name="row-${index}" class="x" />
+            <span>✗</span>
+          </label>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  function updateProgress() {
+    const allChecks = document.querySelectorAll('input.check');
+    const checked = [...allChecks].filter(cb => cb.checked).length;
+    progress.textContent = `✅ Checked: ${checked} / ${allChecks.length}`;
+  }
+
+  function attachListeners() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const name = cb.name;
+        const check = document.querySelector(`input.check[name="${name}"]`);
+        const x = document.querySelector(`input.x[name="${name}"]`);
+
+        if (cb.classList.contains('check') && cb.checked) {
+          x.checked = false;
+          x.disabled = true;
+        } else if (cb.classList.contains('x') && cb.checked) {
+          check.checked = false;
+          check.disabled = true;
+        }
+
+        if (!cb.checked) {
+          check.disabled = false;
+          x.disabled = false;
+        }
+
+        updateProgress();
+      });
     });
+  }
+
+  // Render table and attach listeners
+  data.forEach((row, index) => createRow(row, index));
+  attachListeners();
+  updateProgress();
   </script>
 </body>
 </html>
